@@ -116,14 +116,14 @@ export default {
 
 <style scoped>
 .background-canvas {
-  position: fixed; /* L'assure que le canvas reste en place, même lors du scroll */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Le fond doit être derrière le contenu */
-  background-color: #000000; /* Fond noir ou toute autre couleur de fond */
-  
+  z-index: -1;
+  background-color: #000000;
+  /* AJOUTE UNIQUEMENT CETTE LIGNE CI-DESSOUS */
+  pointer-events: none; 
 }
-
 </style>
