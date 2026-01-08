@@ -1,17 +1,17 @@
 <template>
   <div id="app">
+    <!-- Transition du Loader -->
     <transition name="fade">
      <MonLoader v-if="isLoading" />
     </transition>
     
+    <!-- Fond animé global -->
     <BackgroundCanvas />
     
-    <div class="app-container">
-      <MonMenu /> <main class="main-content">
-        <router-view />
-      </main>
-
-      <AppFooter /> </div>
+    <!-- Contenu de l'application -->
+    <MonMenu /> <!-- Menu global -->
+    <AppFooter /> <!-- Ajoute le footer ici -->
+    <router-view /> <!-- Contenu des pages -->
   </div>
 </template>
 
@@ -37,52 +37,19 @@ export default {
   mounted() {
     setTimeout(() => {
       this.isLoading = false;
-    }, 2000); 
+    }, 2000); // Simulation de chargement
   },
 };
 </script>
 
-<style>
-/* --- STYLES GLOBAUX --- */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  /* Force le noir total partout */
-  background-color: #000000 !important; 
-  overflow-x: hidden;
-}
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Trispace:wght@400;600&display=swap');
 
-#app {
-  font-family: 'Trispace', sans-serif;
-  color: white;
-  background-color: #000000; /* Assure que le fond reste noir sous le contenu */
-  min-height: 100vh;
+/* Effet de transition pour le loader */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
 }
-
-/* --- STRUCTURE RESPONSIVE --- */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
-  z-index: 1;
-  /* On s'assure que le container n'a pas de fond gris */
-  background: transparent; 
-}
-
-.main-content {
-  flex: 1;
-  /* On augmente le padding pour mobile pour éviter les collisions avec le menu */
-  padding: 100px 20px 40px 20px; 
-  box-sizing: border-box;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .main-content {
-    padding: 80px 10px 20px 10px;
-  }
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
