@@ -19,49 +19,50 @@ export default {
 .shadow-button-set {
   margin: 0;
   padding: 0;
-  display: flex; /* Aligne les éléments sur une ligne */
-  flex-direction: row; /* Place les éléments horizontalement */
-  justify-content: flex-end; /* Aligne les boutons à droite */
-  gap: 2vmin; /* Augmente légèrement l'espacement entre les boutons */
-  position: absolute; /* Permet de positionner le menu où on le souhaite */
-  top: 20px; /* Ajoute plus d'espace en haut */
-  right: 20px; /* Espace sur la droite */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 2vmin;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000; /* On s'assure qu'il est bien devant */
 }
 
 .shadow-button-set > li {
   display: inline-flex;
-
 }
 
-/* Styles des liens sans bordure et avec texte blanc */
 .shadow-button-set > li > a {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  font-family: 'Trispace', sans-serif; /* Police Trispace appliquée */
-  outline: none;
-  font-size: 3vmin; /* Taille des liens */
-  border: none; /* Enlève la bordure autour des liens */
-  background: none; /* Enlève le fond des liens */
-  text-decoration: none; /* Supprime le soulignement des liens */
-  color: rgb(255, 255, 255); /* Texte blanc */
-  display: inline-block; /* Nécessaire pour les dimensions */
-  padding: 0.5rem 1rem; /* Ajout d'un espacement interne */
-  transition: none; /* Désactive les transitions */
+  font-family: 'Trispace', sans-serif;
+  font-size: 3vmin;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  padding: 0.5rem 1rem;
+  pointer-events: auto; /* Force la cliquabilité */
 }
 
-/* État de survol et focus : changement de fond */
-
-
-/* Style pour l'onglet actif : agrandissement et texte en gras */
 .shadow-button-set > li > a.router-link-active {
-  font-weight: bold; /* Texte en gras */
-  font-size: 3.5vmin; /* Agrandissement de l'onglet actif */
-  color: rgb(255, 0, 0); /* Couleur différente pour l'onglet actif */
+  font-weight: bold;
+  font-size: 3.5vmin;
+  color: rgb(255, 0, 0);
 }
 
-/* Enlève l'effet de focus autour du lien */
-.shadow-button-set > li > a:focus {
-  outline: none; /* Supprime l'effet de bordure au focus */
+/* --- AJOUT POUR LE MODE PORTRAIT (MOBILE) --- */
+@media (max-width: 768px) {
+  .shadow-button-set {
+    top: 10px;
+    right: 10px;
+    gap: 10px; /* Espace fixe plutôt que vmin pour être plus stable */
+  }
+
+  .shadow-button-set > li > a {
+    font-size: 16px; /* Taille fixe lisible sur mobile */
+    padding: 10px 5px; /* Zone de clic plus grande */
+  }
+
+  .shadow-button-set > li > a.router-link-active {
+    font-size: 18px;
+  }
 }
 </style>
