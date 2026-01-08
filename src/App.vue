@@ -43,20 +43,22 @@ export default {
 </script>
 
 <style>
-/* --- STYLES GLOBAUX (NON SCOPED) --- */
-/* Important pour que le body ne crée pas de marges blanches ou de scroll bizarre */
-body, html {
+/* --- STYLES GLOBAUX --- */
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden; /* Empêche le balancement gauche-droite sur mobile */
-  background-color: #000;
+  /* Force le noir total partout */
+  background-color: #000000 !important; 
+  overflow-x: hidden;
 }
 
 #app {
   font-family: 'Trispace', sans-serif;
   color: white;
+  background-color: #000000; /* Assure que le fond reste noir sous le contenu */
+  min-height: 100vh;
 }
 
 /* --- STRUCTURE RESPONSIVE --- */
@@ -65,28 +67,22 @@ body, html {
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  z-index: 1; /* Pour être au dessus du canvas */
+  z-index: 1;
+  /* On s'assure que le container n'a pas de fond gris */
+  background: transparent; 
 }
 
 .main-content {
-  flex: 1; /* Prend tout l'espace disponible entre le menu et le footer */
-  padding: 80px 20px; /* Laisse de la place pour le menu en haut et de l'air sur les côtés */
+  flex: 1;
+  /* On augmente le padding pour mobile pour éviter les collisions avec le menu */
+  padding: 100px 20px 40px 20px; 
   box-sizing: border-box;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
   .main-content {
-    padding: 70px 15px; /* Ajustement pour les petits écrans */
+    padding: 80px 10px 20px 10px;
   }
-}
-</style>
-
-<style scoped>
-/* Effet de transition pour le loader */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
 }
 </style>
