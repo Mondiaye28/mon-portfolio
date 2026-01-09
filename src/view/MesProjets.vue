@@ -1,6 +1,7 @@
 <template>
   <div class="projets-container">
     <div class="content-wrapper">
+
       <!-- Partie gauche : Titre principal -->
       <div class="left-section">
         <h1 class="projets-title">
@@ -86,6 +87,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding-left: 40px; /* Espace entre le titre et la description sur PC */
 }
 
 .projets-description {
@@ -135,7 +137,52 @@ export default {
   border-bottom: 5px solid transparent;
 }
 
+/* --- RESPONSIVE MOBILE (< 768px) --- */
+@media (max-width: 768px) {
+  .projets-container {
+    /* On passe en hauteur auto pour permettre le scroll */
+    height: auto;
+    min-height: 100vh;
+    
+    /* PADDING IMPORTANT pour éviter le menu fixe (haut) et footer fixe (bas) */
+    padding: 150px 20px 150px 20px;
+    
+    /* On enlève le centrage vertical strict qui peut poser problème */
+    display: block; 
+  }
 
+  .content-wrapper {
+    flex-direction: column; /* On empile les éléments */
+    gap: 40px; /* Espace entre le titre et le texte */
+  }
 
+  /* Ajustements Partie Gauche (Titre) */
+  .left-section {
+    width: 100%;
+    text-align: center; /* Titre centré sur mobile */
+  }
 
+  .projets-title {
+    font-size: 2rem; /* Taille réduite pour mobile */
+  }
+
+  .projets-title span {
+    display: block; /* Le (6) passe à la ligne ou reste à côté selon préférence */
+    font-size: 1.2rem;
+    margin-top: 5px;
+  }
+
+  /* Ajustements Partie Droite (Description + Bouton) */
+  .right-section {
+    width: 100%;
+    padding-left: 0; /* On enlève le padding PC */
+    align-items: center; /* On centre le bouton */
+    text-align: center; /* On centre le texte */
+  }
+
+  .projets-description {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+}
 </style>

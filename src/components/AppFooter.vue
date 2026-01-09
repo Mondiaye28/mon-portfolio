@@ -1,8 +1,7 @@
 <template>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
   <footer class="footer">
-    <p>&copy; 2025 Mohamed Ndiaye. Tous droits réservés.</p>
+    <p class="copyright">&copy; 2025 Mohamed Ndiaye. Tous droits réservés.</p>
+    
     <!-- Icônes des réseaux sociaux -->
     <div class="social-icons">
       <a href="https://www.linkedin.com/in/mohamed-ndiaye-74a403309?" target="_blank" aria-label="LinkedIn">
@@ -11,7 +10,7 @@
       <a href="https://www.instagram.com/votreprofil" target="_blank" aria-label="Instagram">
         <i class="fab fa-instagram"></i>
       </a>
-      <a href="mailto:mohamedndiaye434@gmail.com?subject=Demande%20d'information&body=Bonjour,%0A%0AJe%20souhaitais%20avoir%20plus%20d'informations%20sur%20votre%20travail.%0A%0ACordialement." target="_blank" aria-label="Gmail">
+      <a href="mailto:mohamedndiaye434@gmail.com?subject=Demande%20d'information" target="_blank" aria-label="Gmail">
         <i class="fas fa-envelope"></i>
       </a>
     </div>
@@ -21,39 +20,87 @@
 <script>
 export default {
   name: 'AppFooter',
+  mounted() {
+    // Injection de FontAwesome uniquement si nécessaire
+    if (!document.querySelector('link[href*="font-awesome"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+      document.head.appendChild(link);
+    }
+  }
 };
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Trispace:wght@400;600&display=swap');
+
+/* --- STYLE PC (Identique à ton code original) --- */
 .footer {
-  position: fixed; /* Fixé en bas de la fenêtre */
-  bottom: 10px; /* Distance par rapport au bas */
-  left: 0; /* Aligné à gauche */
-  right: 0; /* Aligné à droite */
+  position: fixed;
+  bottom: 10px; /* Flotte à 10px du bas */
+  left: 0;
+  right: 0;
   margin: 0;
-  padding: 0;
-  font-size: 12px; /* Taille réduite du texte */
-  color: rgb(255, 0, 0); /* Texte blanc */
-  font-family: 'Trispace', sans-serif; /* Police cohérente avec le projet */
+  padding: 0 20px;
+  font-size: 12px;
+  color: rgb(255, 0, 0);
+  font-family: 'Trispace', sans-serif;
   display: flex;
-  justify-content: space-between; /* Espace entre le texte et les icônes */
-  align-items: center; /* Centrage vertical du contenu */
-  padding: 0 20px; /* Ajoute un peu d'espace de chaque côté */
+  justify-content: space-between; /* Espace max entre texte et icônes */
+  align-items: center;
+  z-index: 100;
+  background: transparent; /* Fond transparent sur PC */
+}
+
+.copyright {
+  margin: 0;
+  font-weight: 600;
 }
 
 .social-icons {
   display: flex;
-  gap: 20px; /* Espacement entre les icônes */
+  gap: 20px;
 }
 
 .social-icons a {
-  color: white; /* Icônes blanches */
-  font-size: 20px; /* Taille des icônes */
-  text-decoration: none; /* Enlever le soulignement */
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .social-icons a:hover {
-  color: #ddd; /* Couleur au survol des icônes */
+  color: #ddd;
+}
+
+/* --- RESPONSIVE MOBILE (S'active sur téléphone) --- */
+@media (max-width: 768px) {
+  .footer {
+    bottom: 0; /* Collé au bas */
+    padding: 15px;
+    background-color: #000; /* Fond NOIR pour lisibilité sur mobile */
+    flex-direction: column; /* Empile les éléments */
+    gap: 15px;
+    height: auto; /* Hauteur automatique */
+    border-top: 1px solid #333;
+  }
+
+  .copyright {
+    order: 2; /* Le texte passe en dessous */
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .social-icons {
+    order: 1; /* Les icônes passent au-dessus */
+    gap: 30px; /* Plus d'espace pour cliquer */
+  }
+
+  .social-icons a {
+    font-size: 24px; /* Icônes plus grosses */
+  }
 }
 </style>

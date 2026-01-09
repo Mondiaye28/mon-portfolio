@@ -1,7 +1,6 @@
 <template>
   <div class="homepage">
-    <!-- Couche des icônes flottantes -->
-
+    <!-- Couche des icônes flottantes (place réservée) -->
 
     <!-- Contenu principal -->
     <div class="content">
@@ -20,26 +19,21 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Trispace:wght@400;600&display=swap');
 
-body {
-  margin: 0;
-  font-family: 'Trispace', sans-serif;
-}
-
-/* Couche générale */
+/* --- STYLE GÉNÉRAL (PC - Identique à ton original) --- */
 .homepage {
   position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 3rem;
+  justify-content: flex-start; /* Aligné à gauche */
+  padding-left: 3rem; /* Remis à 3rem comme ton original */
   color: white;
   background-size: cover;
-  overflow: hidden; /* empêche les icônes de sortir de l'écran */
+  overflow: hidden;
+  font-family: 'Trispace', sans-serif;
 }
 
-/* Contenu principal */
 .content {
   position: relative;
   z-index: 2;
@@ -47,7 +41,7 @@ body {
 }
 
 .title {
-  font-size: 4rem;
+  font-size: 4rem; /* Remis à 4rem */
   font-weight: bold;
   margin: 0;
 }
@@ -58,6 +52,38 @@ body {
   margin-top: 0.5rem;
 }
 
+/* --- RESPONSIVE MOBILE (S'active UNIQUEMENT sous 768px) --- */
+@media (max-width: 768px) {
+  .homepage {
+    justify-content: center; /* Sur mobile, on centre */
+    padding-left: 0; /* On annule le padding gauche de 3rem */
+    padding: 0 20px; /* On met une petite marge de sécurité standard */
+    text-align: center;
+  }
 
+  .content {
+    text-align: center; /* Force le centrage du texte */
+    width: 100%;
+  }
 
+  .title {
+    font-size: 3rem; /* On réduit un peu le titre pour qu'il tienne */
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+  }
+}
+
+/* --- RESPONSIVE TRÈS PETITS ÉCRANS --- */
+@media (max-width: 380px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+}
 </style>

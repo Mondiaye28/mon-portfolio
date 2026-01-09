@@ -1,6 +1,7 @@
 <template>
   <div class="loader-overlay">
-    <p class="typewriter">{{ displayedText }}</p>
+    <!-- J'ai ajouté un span 'cursor' pour l'effet clignotant -->
+    <p class="typewriter">{{ displayedText }}<span class="cursor">|</span></p>
   </div>
 </template>
 
@@ -25,6 +26,8 @@ export default {
           this.index++;
         } else {
           clearInterval(interval);
+          // Optionnel: Émettre un événement quand l'anim est finie
+          // this.$emit('loader-finished');
         }
       }, 90); // vitesse de frappe (100ms par caractère)
     },
@@ -33,8 +36,8 @@ export default {
 </script>
 
 <style scoped>
-
 @import url('https://fonts.googleapis.com/css2?family=Trispace:wght@400;600&display=swap');
+
 .loader-overlay {
   position: fixed;
   top: 0;
@@ -46,12 +49,53 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  padding: 20px; /* Marge de sécurité pour ne pas coller aux bords */
+  box-sizing: border-box;
 }
 
 .typewriter {
   font-family: 'Trispace', sans-serif;
-  font-size: 2rem;
+  font-size: 2.5rem; /* Un peu plus grand sur PC pour l'impact */
   color: rgb(255, 0, 0); 
-  white-space: pre; /* garde les espaces et retour ligne */
+  white-space: nowrap; /* Empêche le texte de se casser sur 2 lignes */
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Petit curseur qui clignote pour faire plus "codeur" */
+.cursor {
+  color: white;
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* --- RESPONSIVE MOBILE --- */
+
+/* Pour les tablettes et petits laptops */
+@media (max-width: 1024px) {
+  .typewriter {
+    font-size: 2rem;
+  }
+}
+
+/* Pour les mobiles (iPhone, Android standard) */
+@media (max-width: 768px) {
+  .typewriter {
+    font-size: 1.5rem; /* Taille réduite pour tenir sur l'écran */
+  }
+}
+
+/* Pour les très petits écrans (anciens iPhone SE, Galaxy Fold plié) */
+@media (max-width: 400px) {
+  .typewriter {
+    font-size: 1.2rem;
+    white-space: normal; /* Autorise le retour à la ligne si vraiment nécessaire */
+    word-break: break-word;
+  }
 }
 </style>
