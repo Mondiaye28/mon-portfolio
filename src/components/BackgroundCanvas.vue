@@ -114,19 +114,20 @@ export default {
       });
 
       // 2. Tactile (Mobile/Tablette)
-      // touchstart : quand on pose le doigt
-      window.addEventListener("touchstart", (event) => {
-        mouse.x = event.touches[0].clientX;
-        mouse.y = event.touches[0].clientY;
-      });
+      // L'option { passive: true } permet au navigateur de continuer à scroller
+      // tout en nous envoyant les coordonnées du doigt. C'est crucial pour que
+      // l'animation suive le doigt pendant le défilement.
+      const handleTouch = (event) => {
+        if (event.touches.length > 0) {
+          mouse.x = event.touches[0].clientX;
+          mouse.y = event.touches[0].clientY;
+        }
+      };
 
-      // touchmove : quand on glisse le doigt
-      window.addEventListener("touchmove", (event) => {
-        mouse.x = event.touches[0].clientX;
-        mouse.y = event.touches[0].clientY;
-      });
+      window.addEventListener("touchstart", handleTouch, { passive: true });
+      window.addEventListener("touchmove", handleTouch, { passive: true });
 
-      // touchend : quand on lève le doigt (on reset pour arrêter l'effet)
+      // touchend : quand on lève le doigt
       window.addEventListener("touchend", () => {
         mouse.x = null;
         mouse.y = null;
@@ -155,7 +156,5 @@ export default {
   height: 100%;
   z-index: -1; /* Le fond doit être derrière le contenu */
   background-color: #000000; /* Fond noir ou toute autre couleur de fond */
-  /* Empêche les actions tactiles par défaut du navigateur sur le fond (ex: zoom) pour fluidifier l'animation */
-  touch-action: none; 
 }
 </style>
