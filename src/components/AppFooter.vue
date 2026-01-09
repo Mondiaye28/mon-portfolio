@@ -7,7 +7,7 @@
       <a href="https://www.linkedin.com/in/mohamed-ndiaye-74a403309?" target="_blank" aria-label="LinkedIn">
         <i class="fab fa-linkedin"></i>
       </a>
-      <a href="https://www.instagram.com/votreprofil" target="_blank" aria-label="Instagram">
+      <a href="https://www.instagram.com/m0h.nd_" target="_blank" aria-label="Instagram">
         <i class="fab fa-instagram"></i>
       </a>
       <a href="mailto:mohamedndiaye434@gmail.com?subject=Demande%20d'information" target="_blank" aria-label="Gmail">
