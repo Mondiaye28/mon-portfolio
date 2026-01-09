@@ -44,6 +44,16 @@ export default {
         }
 
         update() {
+          // Si la souris n'est pas sur l'écran (ex: mobile relâché), pas d'interaction
+          if (mouse.x === null || mouse.y === null) {
+            this.dx *= 0.9;
+            this.dy *= 0.9;
+            this.opacity = Math.max(0.2, this.opacity - 0.02);
+            this.x += (this.baseX - this.x) * 0.05;
+            this.y += (this.baseY - this.y) * 0.05;
+            return;
+          }
+
           const dx = mouse.x - this.x;
           const dy = mouse.y - this.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
@@ -95,13 +105,35 @@ export default {
         requestAnimationFrame(animate);
       }
 
+      // --- GESTION ÉVÉNEMENTS ---
+
+      // 1. Souris (PC)
       window.addEventListener("mousemove", (event) => {
         mouse.x = event.x;
         mouse.y = event.y;
       });
 
+      // 2. Tactile (Mobile/Tablette)
+      // touchstart : quand on pose le doigt
+      window.addEventListener("touchstart", (event) => {
+        mouse.x = event.touches[0].clientX;
+        mouse.y = event.touches[0].clientY;
+      });
+
+      // touchmove : quand on glisse le doigt
+      window.addEventListener("touchmove", (event) => {
+        mouse.x = event.touches[0].clientX;
+        mouse.y = event.touches[0].clientY;
+      });
+
+      // touchend : quand on lève le doigt (on reset pour arrêter l'effet)
+      window.addEventListener("touchend", () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+
+      // Redimensionnement
       window.addEventListener("resize", () => {
-        // Mettre à jour la taille du canvas lors du redimensionnement
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         initPoints();
@@ -123,7 +155,7 @@ export default {
   height: 100%;
   z-index: -1; /* Le fond doit être derrière le contenu */
   background-color: #000000; /* Fond noir ou toute autre couleur de fond */
-  
+  /* Empêche les actions tactiles par défaut du navigateur sur le fond (ex: zoom) pour fluidifier l'animation */
+  touch-action: none; 
 }
-
 </style>
