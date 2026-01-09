@@ -1,12 +1,10 @@
 <template>
-  <nav class="nav-container">
-    <ul class="shadow-button-set">
-      <li><router-link to="/" exact-active-class="active-link">Accueil</router-link></li>
-      <li><router-link to="/cv" exact-active-class="active-link">A Propos</router-link></li>
-      <li><router-link to="/projets" exact-active-class="active-link">Projets</router-link></li>
-      <li><router-link to="/contact" exact-active-class="active-link">contact</router-link></li>
-    </ul>
-  </nav>
+  <ul class="shadow-button-set">
+    <li><router-link to="/" exact-active-class="active-link">Accueil</router-link></li>
+    <li><router-link to="/cv" exact-active-class="active-link">A Propos</router-link></li>
+    <li><router-link to="/projets" exact-active-class="active-link">Projets</router-link></li>
+    <li><router-link to="/contact" exact-active-class="active-link">Contact</router-link></li>
+  </ul>
 </template>
 
 <script>
@@ -18,54 +16,52 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Trispace:wght@400;600&display=swap');
 
-.nav-container {
-  position: fixed; /* Reste en haut au scroll */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10000; /* Toujours au-dessus du canvas */
-  pointer-events: none; /* Laisse passer les clics vers le fond si on ne clique pas sur un lien */
-  display: flex;
-  justify-content: flex-end;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
-}
-
 .shadow-button-set {
   margin: 0;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  gap: 2vmin;
-  list-style: none;
-  pointer-events: auto; /* Réactive les clics sur les liens */
+  padding: 0;
+  display: flex; /* Aligne les éléments sur une ligne */
+  flex-direction: row; /* Place les éléments horizontalement */
+  justify-content: flex-end; /* Aligne les boutons à droite */
+  gap: 2vmin; /* Augmente légèrement l'espacement entre les boutons */
+  position: absolute; /* Permet de positionner le menu où on le souhaite */
+  top: 20px; /* Ajoute plus d'espace en haut */
+  right: 20px; /* Espace sur la droite */
 }
 
+.shadow-button-set > li {
+  display: inline-flex;
+
+}
+
+/* Styles des liens sans bordure et avec texte blanc */
 .shadow-button-set > li > a {
-  font-family: 'Trispace', sans-serif;
-  font-size: 16px; /* Taille fixe pour la stabilité */
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-  padding: 0.5rem 1rem;
-  transition: color 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-family: 'Trispace', sans-serif; /* Police Trispace appliquée */
+  outline: none;
+  font-size: 3vmin; /* Taille des liens */
+  border: none; /* Enlève la bordure autour des liens */
+  background: none; /* Enlève le fond des liens */
+  text-decoration: none; /* Supprime le soulignement des liens */
+  color: rgb(255, 255, 255); /* Texte blanc */
+  display: inline-block; /* Nécessaire pour les dimensions */
+  padding: 0.5rem 1rem; /* Ajout d'un espacement interne */
+  transition: none; /* Désactive les transitions */
 }
 
+/* État de survol et focus : changement de fond */
+
+
+/* Style pour l'onglet actif : agrandissement et texte en gras */
 .shadow-button-set > li > a.router-link-active {
-  font-weight: bold;
-  color: rgb(255, 0, 0);
+  font-weight: bold; /* Texte en gras */
+  font-size: 3.5vmin; /* Agrandissement de l'onglet actif */
+  color: rgb(255, 0, 0); /* Couleur différente pour l'onglet actif */
 }
 
-/* --- OPTIMISATION MOBILE --- */
-@media (max-width: 768px) {
-  .shadow-button-set {
-    padding: 15px 10px;
-    gap: 5px;
-    justify-content: center; /* Centre le menu sur mobile pour éviter qu'il ne dépasse */
-    width: 100%;
-  }
-
-  .shadow-button-set > li > a {
-    font-size: 13px; /* Légèrement plus petit pour que tout tienne sur une ligne */
-    padding: 8px 6px;
-  }
+/* Enlève l'effet de focus autour du lien */
+.shadow-button-set > li > a:focus {
+  outline: none; /* Supprime l'effet de bordure au focus */
 }
 </style>
