@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <p class="copyright">&copy; 2025 Mohamed Ndiaye. Tous droits réservés.</p>
+    <p class="copyright">&copy; 2026 Mohamed Ndiaye. Tous droits réservés.</p>
     
     <!-- Icônes des réseaux sociaux -->
     <div class="social-icons">
