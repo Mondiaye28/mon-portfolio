@@ -7,13 +7,13 @@
       <div class="section-header">
         <h2 class="title">MES PROJETS</h2>
         <div class="separator"></div>
-        <p class="subtitle">Glissez pour explorer <span class="arrow">→</span></p>
+        <p class="subtitle">Glissez vers la droite <span class="arrow">→</span></p>
       </div>
 
       <!-- CONTAINER CARROUSEL -->
       <div class="carousel-section">
         
-        <!-- BOUTON GAUCHE -->
+        <!-- BOUTON GAUCHE (Desktop seulement) -->
         <button class="nav-btn prev" @click="scrollLeft" aria-label="Précédent">
           &#10094;
         </button>
@@ -54,7 +54,7 @@
 
         </div>
 
-        <!-- BOUTON DROITE -->
+        <!-- BOUTON DROITE (Desktop seulement) -->
         <button class="nav-btn next" @click="scrollRight" aria-label="Suivant">
           &#10095;
         </button>
@@ -140,11 +140,9 @@ export default {
   },
   methods: {
     scrollLeft() {
-      // Défile vers la gauche de 350px (taille d'une carte approx)
       this.$refs.carousel.scrollBy({ left: -350, behavior: 'smooth' });
     },
     scrollRight() {
-      // Défile vers la droite
       this.$refs.carousel.scrollBy({ left: 350, behavior: 'smooth' });
     }
   }
@@ -158,7 +156,8 @@ export default {
   min-height: 100vh;
   box-sizing: border-box;
   
-  /* CALE POUR LE MENU (Indispensable sur Desktop) */
+  /* CALE POUR LE MENU (Desktop) */
+  /* Utilisation de border-top au lieu de padding pour éviter le glissement */
   border-top: 200px solid transparent; 
   
   position: relative;
@@ -210,6 +209,7 @@ export default {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 /* TRACK (Le conteneur qui défile) */
@@ -220,6 +220,7 @@ export default {
   padding: 20px 40px;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
+  width: 100%;
   
   /* Masquer la barre de défilement */
   scrollbar-width: none;
@@ -246,7 +247,6 @@ export default {
   justify-content: center;
   flex-shrink: 0;
 }
-
 .nav-btn:hover {
   background-color: rgb(255, 0, 0);
   color: white;
@@ -255,8 +255,9 @@ export default {
 
 /* --- CARTE PROJET --- */
 .project-card {
+  flex: 0 0 auto; /* Empêche l'écrasement */
   min-width: 350px;
-  max-width: 350px;
+  width: 350px;
   height: 450px;
   scroll-snap-align: center;
   
@@ -276,7 +277,6 @@ export default {
   box-shadow: 0 10px 40px rgba(255, 0, 0, 0.15);
 }
 
-/* HAUT (Image) */
 .card-header {
   height: 200px;
   background-color: #151515;
@@ -293,7 +293,6 @@ export default {
 .img-container { flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .project-img { max-width: 90%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5)); }
 
-/* BAS (Info) */
 .card-body {
   padding: 25px;
   display: flex;
@@ -311,48 +310,52 @@ export default {
 .open-btn { display: block; width: 100%; text-align: center; padding: 10px 0; background: transparent; border: 1px solid rgb(255, 0, 0); color: rgb(255, 0, 0); font-weight: 700; text-decoration: none; border-radius: 6px; transition: all 0.3s ease; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
 .open-btn:hover { background: rgb(255, 0, 0); color: white; box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
 
-/* RESPONSIVE MOBILE OPTIMISÉ */
+/* --- RESPONSIVE MOBILE OPTIMISÉ --- */
 @media (max-width: 768px) {
-  /* On réduit la cale en haut pour gagner de la place */
+  
+  /* 1. ESPACE TITRE MASSIF (Bordure transparente) */
   .projects-page-root {
-    border-top: 100px solid transparent; 
+    border-top: 220px solid transparent; /* 220px de vide physique en haut */
+    padding-top: 0; /* On annule le padding pour utiliser la bordure */
   }
 
   .projects-wrapper {
+    /* On laisse le contenu déborder pour le scroll */
+    overflow: visible; 
     padding-bottom: 40px;
   }
   
-  /* Titre plus compact */
-  .title {
-    font-size: 2rem;
-  }
   .section-header { 
     padding-left: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+  }
+  .title { font-size: 2rem; }
+
+  /* 2. NAVIGATION MOBILE */
+  .nav-btn { display: none; }
+  
+  .carousel-section {
+    display: block;
+    width: 100%;
   }
 
-  /* Ajustement des boutons */
-  .nav-btn { display: none; } /* Tactile uniquement sur mobile */
-  
-  /* Ajustement du track */
-  .carousel-track { 
-    padding: 10px 20px; 
+  .carousel-track {
+    padding: 10px 20px;
+    padding-right: 50px; /* Espace à la fin */
     gap: 15px;
+    -webkit-overflow-scrolling: touch; /* Scroll élastique iOS */
   }
 
-  /* Carte adaptée : on voit un bout de la suivante (85vw) pour inciter au scroll */
+  /* 3. TAILLE DES CARTES MOBILE */
   .project-card {
-    min-width: 80vw;
-    max-width: 300px;
-    height: 400px;
+    min-width: 80vw; /* Prend 80% de la largeur de l'écran */
+    width: 80vw;
+    max-width: 320px;
+    height: 420px;
+    margin-right: 10px;
   }
   
-  .card-header {
-    height: 160px; /* Image moins haute */
-  }
-
-  .project-title {
-    font-size: 1.2rem;
-  }
+  .card-header { height: 160px; }
+  .project-title { font-size: 1.3rem; }
 }
 </style>
