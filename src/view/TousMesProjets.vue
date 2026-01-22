@@ -13,7 +13,7 @@
       <!-- CONTAINER CARROUSEL -->
       <div class="carousel-section">
         
-        <!-- BOUTON GAUCHE (Desktop seulement) -->
+        <!-- BOUTON GAUCHE -->
         <button class="nav-btn prev" @click="scrollLeft" aria-label="Précédent">
           &#10094;
         </button>
@@ -54,7 +54,7 @@
 
         </div>
 
-        <!-- BOUTON DROITE (Desktop seulement) -->
+        <!-- BOUTON DROITE -->
         <button class="nav-btn next" @click="scrollRight" aria-label="Suivant">
           &#10095;
         </button>
@@ -140,6 +140,7 @@ export default {
   },
   methods: {
     scrollLeft() {
+      // Défilement fixe de 350px (taille d'une carte)
       this.$refs.carousel.scrollBy({ left: -350, behavior: 'smooth' });
     },
     scrollRight() {
@@ -156,7 +157,7 @@ export default {
   min-height: 100vh;
   box-sizing: border-box;
   
-  /* CALE POUR LE MENU (Desktop) */
+  /* CALE POUR LE MENU (Fixe pour tous les écrans) */
   /* Utilisation de border-top au lieu de padding pour éviter le glissement */
   border-top: 200px solid transparent; 
   
@@ -309,53 +310,4 @@ export default {
 .btn-container { margin-top: auto; }
 .open-btn { display: block; width: 100%; text-align: center; padding: 10px 0; background: transparent; border: 1px solid rgb(255, 0, 0); color: rgb(255, 0, 0); font-weight: 700; text-decoration: none; border-radius: 6px; transition: all 0.3s ease; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
 .open-btn:hover { background: rgb(255, 0, 0); color: white; box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
-
-/* --- RESPONSIVE MOBILE OPTIMISÉ --- */
-@media (max-width: 768px) {
-  
-  /* 1. ESPACE TITRE MASSIF (Bordure transparente) */
-  .projects-page-root {
-    border-top: 220px solid transparent; /* 220px de vide physique en haut */
-    padding-top: 0; /* On annule le padding pour utiliser la bordure */
-  }
-
-  .projects-wrapper {
-    /* On laisse le contenu déborder pour le scroll */
-    overflow: visible; 
-    padding-bottom: 40px;
-  }
-  
-  .section-header { 
-    padding-left: 20px;
-    margin-bottom: 10px;
-  }
-  .title { font-size: 2rem; }
-
-  /* 2. NAVIGATION MOBILE */
-  .nav-btn { display: none; }
-  
-  .carousel-section {
-    display: block;
-    width: 100%;
-  }
-
-  .carousel-track {
-    padding: 10px 20px;
-    padding-right: 50px; /* Espace à la fin */
-    gap: 15px;
-    -webkit-overflow-scrolling: touch; /* Scroll élastique iOS */
-  }
-
-  /* 3. TAILLE DES CARTES MOBILE */
-  .project-card {
-    min-width: 80vw; /* Prend 80% de la largeur de l'écran */
-    width: 80vw;
-    max-width: 320px;
-    height: 420px;
-    margin-right: 10px;
-  }
-  
-  .card-header { height: 160px; }
-  .project-title { font-size: 1.3rem; }
-}
 </style>
